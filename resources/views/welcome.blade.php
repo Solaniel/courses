@@ -1,3 +1,4 @@
+@extends('layouts.app')
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -12,9 +13,7 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
+
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
@@ -49,7 +48,6 @@
             }
 
             .links > a {
-                color: #636b6f;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;

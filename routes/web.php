@@ -17,4 +17,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//Route::group(['prefix' => 'admin', 'middleware' =>
+    //['web', 'auth'], 'namespace' => 'Admin'], function () {
+    Route::resource('courses','CourseController');
+    Route::resource('lecturers','LecturerController');
+    Route::resource('organisations','OrganisationController');
+    Route::resource('locations','LocationController');
+//});
+
+
 Route::get('/home', 'HomeController@index')->name('home');
+
