@@ -62,6 +62,12 @@
         </style>
     </head>
     <body>
+        <nav class="links">
+            <a href="/courses">Courses</a>
+            <a href="/lecturers">Lecturers</a>
+            <a href="/organisations">Organisations</a>
+            <a href="/locations">Locations</a>
+        </nav>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
