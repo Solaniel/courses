@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Course;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
 
 class CourseController extends Controller
 {
@@ -15,8 +17,9 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
-        return view('courses.index')->with('courses' , $courses);
+        $courseModel = new Course();
+        $allcourses = $courseModel::all();
+        return view('courses.index')->with('courses' , $allcourses);
     }
 
     /**
@@ -37,7 +40,35 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $rules = array(
+            'courseName' => 'bail||required|max:255',
+            'conDate' => 'required',
+            'duration' => 'required',
+            'lecturer' => 'required|max:128',
+            'organisation' => 'required|max:128',
+            'location' => 'required|max:128',
+        );
+
+        $validator = Validator::make($request->all(),$rules);
+
+        if($validator->fails()) {
+            return redirect('courses/create')->WithErrors($validator);
+        } else {
+            $course = new Course([
+                'courseName' => $request->get('courseName'),
+                'conDate' => $request->get('conDate'),
+                'duration' => $request->get('duration'),
+                'lecturer' => $request->get('lecturer'),
+                'organisation' => $request->get('organisation'),
+                'location' => $request->get('location'),
+            ]);
+
+            $course->save();
+            return redirect('courses');
+        }
+
+
     }
 
     /**
@@ -59,7 +90,9 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $course = Course::find($id);
+
+        return view('courses.edit', compact('course','id'));
     }
 
     /**
@@ -71,7 +104,16 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $course = Course::find($id);
+        $course->courseName = $request->get('courseName');
+        $course->conDate = $request->get('conDate');
+        $course->duration = $request->get('duration');
+        $course->lecturer = $request->get('lecturer');
+        $course->organisation = $request->get('organisation');
+        $course->location = $request->get('location');
+        $course->save();
+        return redirect('courses')->with('success', 'Task was successful!');
+
     }
 
     /**

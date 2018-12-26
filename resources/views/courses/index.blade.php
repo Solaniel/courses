@@ -57,6 +57,10 @@
     <a href="/locations">Locations</a>
 </nav>
 <h1>INDEX</h1>
+<div class="panel-heading">
+    Subjects
+    <a class="btn btn-small btn-info" href="{{ URL::to('courses/create') }}">Create a Course</a>
+</div>
 <table class="table-bordered">
     <thead class="thead-dark">
     <tr>
@@ -76,8 +80,8 @@
             <td>{{$value->id}}</td>
             <td>{{$value->courseName}}</td>
             <td>{{$value->condate}}</td>
-            <td>{{$value->duration}}</td>
-            <td>{{$value->lecturer}}</td>
+            <td>{{$value->duration}} minutes</td>
+            <td>Mr./Mrs. {{$value->lecturer}}</td>
             <td>{{$value->organisation}}</td>
             <td>{{$value->location}}</td>
             <td>
