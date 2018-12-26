@@ -79,7 +79,9 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        //
+        $course = Course::find($id);
+
+        return view('courses.show',compact('course', 'id'));
     }
 
     /**
@@ -124,6 +126,9 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $course = Course::find($id);
+        $course->delete();
+
+        return redirect('courses')->with('success','Course has been deleted');
     }
 }

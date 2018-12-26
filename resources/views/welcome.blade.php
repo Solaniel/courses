@@ -62,12 +62,9 @@
         </style>
     </head>
     <body>
-        <nav class="links">
-            <a href="/courses">Courses</a>
-            <a href="/lecturers">Lecturers</a>
-            <a href="/organisations">Organisations</a>
-            <a href="/locations">Locations</a>
-        </nav>
+       <div class="position-ref">
+
+       </div>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -89,12 +86,10 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a class ="btn btn-group-lg btn-info" href="/courses">Courses</a>
+                    <a href="/lecturers">Lecturers</a>
+                    <a href="/organisations">Organisations</a>
+                    <a href="/locations">Locations</a>
                 </div>
             </div>
         </div>

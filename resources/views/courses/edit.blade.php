@@ -50,7 +50,8 @@
     </style>
 </head>
 <body>
-<nav class="links">
+<nav class="btn btn-light links">
+    <a href="{{ url('/') }}">Home</a>
     <a href="/courses">Courses</a>
     <a href="/lecturers">Lecturers</a>
     <a href="/organisations">Organisations</a>

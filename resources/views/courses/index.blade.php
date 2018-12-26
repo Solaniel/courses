@@ -50,7 +50,9 @@
     </style>
 </head>
 <body>
-<nav class="links">
+
+<nav class="btn btn-light links">
+    <a href="{{ url('/') }}">Home</a>
     <a href="/courses">Courses</a>
     <a href="/lecturers">Lecturers</a>
     <a href="/organisations">Organisations</a>
@@ -71,7 +73,7 @@
         <th>Lecturer</th>
         <th>Organisation</th>
         <th>Location</th>
-        <th colspan="2">Actions</th>
+        <th colspan="3">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -84,6 +86,9 @@
             <td>Mr./Mrs. {{$value->lecturer}}</td>
             <td>{{$value->organisation}}</td>
             <td>{{$value->location}}</td>
+            <td>
+                <a class="btn btn-primary btn-red" href="{{ route('courses.show', $value->id) }}" method="POST">Show</a>
+            </td>
             <td>
                 <a class="btn btn-small btn-info" href="{{ URL::to('courses/' . $value->id . '/edit') }}">Edit subject</a>
             </td>

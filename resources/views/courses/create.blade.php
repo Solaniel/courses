@@ -50,7 +50,23 @@
     </style>
 </head>
 <body>
-<nav class="links">
+<div class="top-right">
+    @if (Route::has('login'))
+        <div class="">
+            @auth
+                <a href="{{ url('/home') }}">Home</a>
+            @else
+                <a href="{{ route('login') }}">Login</a>
+
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}">Register</a>
+                @endif
+            @endauth
+        </div>
+    @endif
+</div>
+<nav class="btn btn-light links">
+    <a href="{{ url('/') }}">Home</a>
     <a href="/courses">Courses</a>
     <a href="/lecturers">Lecturers</a>
     <a href="/organisations">Organisations</a>
@@ -113,26 +129,13 @@
         <div class="form-group row">
             <div class="col-md-2"></div>
             <input type="submit" class="btn btn-primary">
+            <div class="col-xl-1"></div>
+            <a class="btn btn-primary" href="{{ route('courses.index') }}"> Back</a>
         </div>
     </form>
 </div>
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
-        </div>
-    @endif
 
 
-</div>
 </body>
 </html>
 
