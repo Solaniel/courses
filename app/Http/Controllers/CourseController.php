@@ -42,12 +42,12 @@ class CourseController extends Controller
     {
 
         $rules = array(
-            'courseName' => 'bail||required|max:255',
+            'courseName' => 'bail||required|min:2|max:255',
             'conDate' => 'required',
             'duration' => 'required',
-            'lecturer' => 'required|max:128',
-            'organisation' => 'required|max:128',
-            'location' => 'required|max:128',
+            'lecturer' => 'required|min:2|max:128',
+            'organisation' => 'required|min:2|max:128',
+            'location' => 'required|min:1|max:128',
         );
 
         $validator = Validator::make($request->all(),$rules);
