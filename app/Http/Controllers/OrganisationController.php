@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Organisation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class OrganisationController extends Controller
 {
@@ -13,7 +15,10 @@ class OrganisationController extends Controller
      */
     public function index()
     {
-        //
+        $organisationModel = new Organisation();
+        $allOrganisations = $organisationModel::all();
+
+        return view('organisations.index')->with('organisations',$allOrganisations);
     }
 
     /**
@@ -23,7 +28,7 @@ class OrganisationController extends Controller
      */
     public function create()
     {
-        //
+        return view('organisations.create');
     }
 
     /**
@@ -34,7 +39,26 @@ class OrganisationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules=array(
+            'organisationName' => 'required|min:2|max:50',
+            'description' => 'required|min:2|max:255',
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()) {
+            return redirect('organisations/create')->WithErrors($validator);
+        } else {
+            $organisation = new Organisation([
+                'organisationName' => $request->get('organisationName'),
+                'description' => $request->get('description'),
+            ]);
+
+            $organisation->save();
+
+            return redirect('organisations');
+
+        }
     }
 
     /**
@@ -45,7 +69,9 @@ class OrganisationController extends Controller
      */
     public function show($id)
     {
-        //
+        $organisation = Organisation::find($id);
+
+        return view('organisations.show',compact('organisation','id'));
     }
 
     /**
@@ -56,7 +82,9 @@ class OrganisationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $organisation = Organisation::find($id);
+
+        return view('organisations.edit',compact('organisation','id'));
     }
 
     /**
@@ -68,7 +96,14 @@ class OrganisationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $organisation = Organisation::find($id);
+
+        $organisation->organisationName = $request->get('organisationName');
+        $organisation->description = $request->get('description');
+
+        $organisation->save();
+
+        return redirect('organisations')->with('success', 'Task was successful!');
     }
 
     /**
@@ -79,6 +114,9 @@ class OrganisationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $organisation = Organisation::find($id);
+        $organisation->delete();
+
+        return redirect('organisations')->with('success','Lecturer has been removed');
     }
 }
