@@ -51,7 +51,7 @@
 </head>
 <body>
 
-<nav class="btn btn-light links">
+<nav class="btn btn-light links" style="width:100%">
     <a href="{{ url('/') }}">Home</a>
     <a href="/courses">Courses</a>
     <a href="/lecturers">Lecturers</a>
@@ -60,9 +60,21 @@
 </nav>
 <h1>INDEX</h1>
 <div class="panel-heading">
-    Subjects
     <a class="btn btn-small btn-info" href="{{ URL::to('courses/create') }}">Create a Course</a>
 </div>
+<br>
+<form action="/search" method="POST" role="search">
+    {{ csrf_field() }}
+    <div class="input-group">
+        <input type="text" class="form-control" name="q"
+               placeholder="Search by user or a date"> <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-search">Search</span>
+            </button>
+        </span>
+    </div>
+</form>
+<br>
 <table class="table-bordered">
     <thead class="thead-dark">
     <tr>
