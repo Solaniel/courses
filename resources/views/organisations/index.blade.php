@@ -62,6 +62,19 @@
 <div class="panel-heading">
     <a class="btn btn-small btn-info" href="{{ URL::to('organisations/create') }}">Add an organisation</a>
 </div>
+<br>
+<form action="{{action("SearchController@searchOrganisations")}}" method="POST" role="search">
+    {{ csrf_field() }}
+    <div class="input-group">
+        <input type="text" class="form-control" name="q"
+               placeholder="Search a lecturer by first name or a last name"> <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-search">Search</span>
+            </button>
+        </span>
+    </div>
+</form>
+<br>
 <table class="table-bordered">
     <thead class="thead-dark">
     <tr>

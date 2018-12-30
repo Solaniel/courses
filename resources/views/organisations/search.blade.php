@@ -38,21 +38,15 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Course Name</th>
-            <th>Conduction Date</th>
-            <th>Lecturer</th>
-            <th>Organisation</th>
-            <th>Location</th>
+            <th>Organisation Name</th>
+            <th>Description</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($details as $courses)
+        @foreach($details as $organisations)
             <tr>
-                <td>{{$courses->courseName}}</td>
-                <td>{{$courses->condate}}</td>
-                <td>{{$courses->lecturer}}</td>
-                <td>{{$courses->organisation}}</td>
-                <td>{{$courses->location}}</td>
+                <td>{{$organisations->organisationName}}</td>
+                <td>{{$organisations->description}}</td>
             </tr>
         @endforeach
         </tbody>
@@ -61,10 +55,9 @@
 @elseif(isset($message))
     <h1>{{$message}}</h1>
 @endif
-
-<div class="form-group row">
+    <div class="form-group row">
     <div class="col-xl-1"></div>
     <a class="btn btn-primary" href="{{ route('organisations.index') }}"> Back</a>
-</div>
+    </div>
 </body>
 </html>

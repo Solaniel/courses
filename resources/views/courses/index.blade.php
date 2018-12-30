@@ -1,5 +1,7 @@
 @extends('layouts.app')
         <!doctype html>
+<?php use App\Http\Controllers\SearchController;
+?>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -63,7 +65,7 @@
     <a class="btn btn-small btn-info" href="{{ URL::to('courses/create') }}">Create a Course</a>
 </div>
 <br>
-<form action="/search" method="POST" role="search">
+<form action="{{action("SearchController@searchCourses")}}" method="POST" role="search">
     {{ csrf_field() }}
     <div class="input-group">
         <input type="text" class="form-control" name="q"

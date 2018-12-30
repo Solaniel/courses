@@ -34,25 +34,21 @@
 <div class="container">
     @if(isset($details))
     <p style="font-size: 25px;" class="text-center"> The Search results for your query <b> {{ $query }} </b> are :</p>
-    <h2>Course Details</h2>
+    <h2>Lecturer Details</h2>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Course Name</th>
-            <th>Conduction Date</th>
-            <th>Lecturer</th>
+            <th>First Name</th>
+            <th>Last Name</th>
             <th>Organisation</th>
-            <th>Location</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($details as $courses)
+        @foreach($details as $lecturers)
             <tr>
-                <td>{{$courses->courseName}}</td>
-                <td>{{$courses->condate}}</td>
-                <td>{{$courses->lecturer}}</td>
-                <td>{{$courses->organisation}}</td>
-                <td>{{$courses->location}}</td>
+                <td>{{$lecturers->firstName}}</td>
+                <td>{{$lecturers->lastName}}</td>
+                <td>{{$lecturers->organisation}}</td>
             </tr>
         @endforeach
         </tbody>
@@ -61,7 +57,6 @@
 @elseif(isset($message))
     <h1>{{$message}}</h1>
 @endif
-
 <div class="form-group row">
     <div class="col-xl-1"></div>
     <a class="btn btn-primary" href="{{ route('organisations.index') }}"> Back</a>

@@ -26,13 +26,10 @@ Auth::routes();
     Route::resource('locations','LocationController');
 //});
 
-Route::any('/search',function(){
-    $q = Input::get ( 'q' );
-    $course = Course::where('courseName','LIKE','%'.$q.'%')->orWhere('conDate','LIKE','%'.$q.'%')->get();
-    if(count($course) > 0)
-        return view('courses.search')->withDetails($course)->withQuery ( $q );
-    else return view('courses.search')->withMessage('No Details found. Try to search again !');
-});
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::post('courses.search', 'SearchController@searchCourses');
+Route::post('lecturers.search', 'SearchController@searchLecturers');
+Route::post('organisations.search', 'SearchController@searchOrganisations');
