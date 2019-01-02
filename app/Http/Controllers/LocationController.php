@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LocationController extends Controller
 {
@@ -13,7 +15,9 @@ class LocationController extends Controller
      */
     public function index()
     {
-        //
+        $locationModel = new Location();
+        $alllocations = $locationModel::all();
+        return view('locations.index')->with('locations' , $alllocations);
     }
 
     /**
@@ -23,7 +27,7 @@ class LocationController extends Controller
      */
     public function create()
     {
-        //
+        return view('locations.create');
     }
 
     /**
@@ -34,7 +38,27 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules=array(
+            'locationName' => 'required|min:2|max:128',
+            'locationDescription' => 'required|min:2|max:128',
+
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()) {
+            return redirect('locations/create')->WithErrors($validator);
+        } else {
+            $location = new Location([
+                'locationName' => $request->get('locationName'),
+                'locationDescription' => $request->get('locationDescription')
+            ]);
+
+            $location->save();
+
+            return redirect('locations');
+
+        }
     }
 
     /**
@@ -45,7 +69,9 @@ class LocationController extends Controller
      */
     public function show($id)
     {
-        //
+        $location = Location::find($id);
+
+        return view('locations.show',compact('location','id'));
     }
 
     /**
@@ -56,7 +82,9 @@ class LocationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $location = Location::find($id);
+
+        return view('locations.edit',compact('location','id'));
     }
 
     /**
@@ -68,7 +96,14 @@ class LocationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $location = Location::find($id);
+
+        $location->locationName = $request->get('locationName');
+        $location->locationDescription = $request->get('locationDescription');
+
+        $location->save();
+
+        return redirect('locations')->with('success', 'Task was successful!');
     }
 
     /**
@@ -79,6 +114,9 @@ class LocationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $location = Location::find($id);
+        $location->delete();
+
+        return redirect('locations')->with('success','Location has been removed');
     }
 }

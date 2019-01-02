@@ -117,6 +117,6 @@ class OrganisationController extends Controller
         $organisation = Organisation::find($id);
         $organisation->delete();
 
-        return redirect('organisations')->with('success','Lecturer has been removed');
+        return redirect('organisations')->with('success','Organisation has been deleted');
     }
 }

@@ -33,3 +33,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('courses.search', 'SearchController@searchCourses');
 Route::post('lecturers.search', 'SearchController@searchLecturers');
 Route::post('organisations.search', 'SearchController@searchOrganisations');
+
+Route::resource('images', 'ImagesController');
