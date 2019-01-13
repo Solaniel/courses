@@ -66,7 +66,7 @@
     <thead class="thead-dark">
     <tr>
         <th>ID</th>
-        <th>Organisation Name</th>
+        <th>Location Name</th>
         <th>Description</th>
         <th colspan="3">Actions</th>
     </tr>

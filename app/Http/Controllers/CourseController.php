@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\View\View;
-use App\Course;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use App\Course;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
@@ -29,7 +29,12 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('courses.create');
+        //if (Auth::user()->isAdmin()){
+            return view('courses.create');
+       // }
+        //else {
+         //   redirect('/');
+       // }
     }
 
     /**
@@ -42,7 +47,7 @@ class CourseController extends Controller
     {
 
         $rules = array(
-            'courseName' => 'bail||required|min:2|max:255',
+            'courseName' => 'bail|required|min:2|max:255',
             'conDate' => 'required',
             'duration' => 'required',
             'lecturer' => 'required|min:2|max:128',
@@ -51,7 +56,7 @@ class CourseController extends Controller
         );
 
         $validator = Validator::make($request->all(),$rules);
-
+ 
         if($validator->fails()) {
             return redirect('courses/create')->WithErrors($validator);
         } else {

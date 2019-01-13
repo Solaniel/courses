@@ -64,7 +64,7 @@
 
 <div class="form-group row">
     <div class="col-xl-1"></div>
-    <a class="btn btn-primary" href="{{ route('organisations.index') }}"> Back</a>
+    <a class="btn btn-primary" href="{{ route('courses.index') }}"> Back</a>
 </div>
 </body>
 </html>
