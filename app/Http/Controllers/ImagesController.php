@@ -47,7 +47,7 @@ class ImagesController extends Controller
         ]);
         $image->save();
 
-        return redirect('images');
+        return redirect('images')->with('success', 'Image was uploaded successfully');
     }
 
     /**

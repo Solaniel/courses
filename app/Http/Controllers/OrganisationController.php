@@ -60,7 +60,7 @@ class OrganisationController extends Controller
 
             $organisation->save();
 
-            return redirect('organisations');
+            return redirect('organisations')->with('success', 'Organisation was added');;
 
         }
     }
@@ -107,7 +107,7 @@ class OrganisationController extends Controller
 
         $organisation->save();
 
-        return redirect('organisations')->with('success', 'Task was successful!');
+        return redirect('organisations')->with('update', 'Task was successful!');
     }
 
     /**
@@ -121,6 +121,6 @@ class OrganisationController extends Controller
         $organisation = Organisation::find($id);
         $organisation->delete();
 
-        return redirect('organisations')->with('success','Organisation has been deleted');
+        return redirect('organisations')->with('delete','Organisation has been deleted');
     }
 }

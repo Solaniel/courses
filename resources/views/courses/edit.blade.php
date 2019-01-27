@@ -39,13 +39,7 @@
             {{csrf_field()}}
             <label for="Lecturer" class="col-sm-2 col-form-label col-form-label-lg">Lecturer</label>
             <div class="col-sm-10">
-                <?php if (!empty($allcourses)):?>
-                <select name="lecturer_id" class="form-control">
-                    <?php foreach($allcourses as $key => $value):?>
-                    <option name="lecturer" selected value="<?php echo $key; ?>"><?php echo $value; ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <?php endif; ?>
+                <input type="text" class="form-control form-control-lg" id="lgFormGroupInput5" placeholder="Lecturer" name="lecturer" value="{{$course->lecturer}}">
             </div>
         </div>
         <div class="form-group row">

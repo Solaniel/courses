@@ -63,7 +63,7 @@ class LecturerController extends Controller
 
             $lecturer->save();
 
-            return redirect('lecturers');
+            return redirect('lecturers')->with('success', 'Lecturer was added');;
 
         }
     }
@@ -111,7 +111,7 @@ class LecturerController extends Controller
 
         $lecturer->save();
 
-        return redirect('lecturers')->with('success', 'Task was successful!');
+        return redirect('lecturers')->with('update', 'Update was successful!');
     }
 
     /**
@@ -125,6 +125,6 @@ class LecturerController extends Controller
         $lecturer = Lecturer::find($id);
         $lecturer->delete();
 
-        return redirect('lecturers')->with('success','Lecturer has been removed');
+        return redirect('lecturers')->with('delete','Lecturer has been removed');
     }
 }

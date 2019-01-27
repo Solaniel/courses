@@ -60,7 +60,7 @@ class LocationController extends Controller
 
             $location->save();
 
-            return redirect('locations');
+            return redirect('locations')->with('success', 'Location was added');;
 
         }
     }
@@ -107,7 +107,7 @@ class LocationController extends Controller
 
         $location->save();
 
-        return redirect('locations')->with('success', 'Task was successful!');
+        return redirect('locations')->with('update', 'Task was successful!');
     }
 
     /**
@@ -121,6 +121,6 @@ class LocationController extends Controller
         $location = Location::find($id);
         $location->delete();
 
-        return redirect('locations')->with('success','Location has been removed');
+        return redirect('locations')->with('delete','Location has been removed');
     }
 }
