@@ -34,8 +34,4 @@ class SearchController extends Controller
         else return view('organisations.search')->withMessage('No Details found. Try to search again !');
 
     }
-
-    public function hasbeenRented() {
-
-    }
 }

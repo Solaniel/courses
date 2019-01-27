@@ -106,13 +106,27 @@
                 <input type="text" class="form-control form-control-lg" id="lgFormGroupInput3" placeholder="Duration" name="duration">
             </div>
         </div>
-        <div class="form-group row">
-            {{csrf_field()}}
+       <!-- <div class="form-group row">
+         
             <label for="Lecturer" class="col-sm-2 col-form-label col-form-label-lg">Lecturer</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control form-control-lg" id="lgFormGroupInput4" placeholder="Lecturer" name="lecturer">
             </div>
+        </div> -->
+        <div class="form-group row">
+            {{csrf_field()}}
+            <label for="Lecturer" class="col-sm-2 col-form-label col-form-label-lg">Lecturer</label>
+            <div class="col-sm-10">
+        <?php if (!empty($allcourses)):?>
+        <select name="lecturer_id" class="form-control">
+            <?php foreach($allcourses as $key => $value):?>
+            <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+            <?php endforeach; ?>
+        </select>
+        <?php endif; ?>
+            </div>
         </div>
+
         <div class="form-group row">
             {{csrf_field()}}
             <label for="Organisation" class="col-sm-2 col-form-label col-form-label-lg">Organisation</label>

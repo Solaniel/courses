@@ -11,7 +11,7 @@
 <br />
 
 <div class="container">
-    <h3 align="center">File Uploading in Laravel</h3>
+    <h3 align="center">File Upload</h3>
     <br />
     <form method="post" action="{{url('images')}}" enctype="multipart/form-data">
         {{ csrf_field() }}

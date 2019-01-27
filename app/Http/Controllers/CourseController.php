@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Course;
+use App\Lecturer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -29,8 +31,14 @@ class CourseController extends Controller
      */
     public function create()
     {
+        $courseModel = new Course();
+        $lecturer = new Lecturer();
+
+        $allcourses = $courseModel::all();//->pluck('firstName','id');
+        $data = $lecturer->getSpecificSelectData();
+        $allcourses = ['0' => 'Select Lecturer'] + $data;
         //if (Auth::user()->isAdmin()){
-            return view('courses.create');
+            return view('courses.create')->with('allcourses',$allcourses);
        // }
         //else {
          //   redirect('/');
@@ -44,6 +52,7 @@ class CourseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+
     {
 
         $rules = array(
@@ -70,7 +79,7 @@ class CourseController extends Controller
             ]);
 
             $course->save();
-            return redirect('courses');
+            return redirect('courses')->with('success', 'Task was successful');
         }
 
 
@@ -119,7 +128,7 @@ class CourseController extends Controller
         $course->organisation = $request->get('organisation');
         $course->location = $request->get('location');
         $course->save();
-        return redirect('courses')->with('success', 'Task was successful!');
+        return redirect('courses')->with('update', 'Task was successful!');
 
     }
 
@@ -134,6 +143,6 @@ class CourseController extends Controller
         $course = Course::find($id);
         $course->delete();
 
-        return redirect('courses')->with('success','Course has been deleted');
+        return redirect('courses')->with('delete','Course has been deleted');
     }
 }

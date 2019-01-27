@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ImageUpload;
 use App\Images;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ImagesController extends Controller
 {
@@ -91,6 +92,10 @@ class ImagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $image = Images::find($id);
+        Storage::delete('public/course-images/' . $image->fileName);
+        $image->delete();
+
+        return redirect('images')->with('delete', 'Image was deleted');
     }
 }
