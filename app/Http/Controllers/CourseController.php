@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth',['except' => ['index' , 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,9 +27,12 @@ class CourseController extends Controller
         $lecturer = new Lecturer();
         $courseModel = new Course();
 
-        $lecturers = $courseModel->getLecturers();
+       // $lecturerName = $courseModel->lecturer();
+        //$lecturer = Lecturer::find($lecturerName);
 
-        $allcourses = $courseModel::all();
+
+
+        $allcourses = $courseModel::orderBy('courseName','asc')->paginate(5);
 
         return view('courses.index', compact('lecturers'))->with('courses' , $allcourses);
     }
@@ -37,17 +45,11 @@ class CourseController extends Controller
     public function create()
     {
         $courseModel = new Course();
-        $lecturer = new Lecturer();
 
-        $allcourses = $courseModel::all();//->pluck('firstName','id');
-        $data = $lecturer->getSpecificSelectData();
-        $allcourses = ['0' => 'Select Lecturer'] + $data;
-        //if (Auth::user()->isAdmin()){
+
+        $allcourses = $courseModel::all();
             return view('courses.create')->with('allcourses',$allcourses);
-       // }
-        //else {
-         //   redirect('/');
-       // }
+
     }
 
     /**
@@ -64,8 +66,7 @@ class CourseController extends Controller
             'courseName' => 'bail|required|min:2|max:255',
             'conDate' => 'required',
             'duration' => 'required',
-            'lecturer' => 'nullable',
-            'lecturer_id' => 'required',
+            'lecturer' => 'required',
             'organisation' => 'required|min:2|max:128',
             'location' => 'required|min:1|max:128',
         );
@@ -80,7 +81,6 @@ class CourseController extends Controller
                 'conDate' => $request->get('conDate'),
                 'duration' => $request->get('duration'),
                 'lecturer' => $request->get('lecturer'),
-                'lecturer_id' => $request->get('lecturer_id'),
                 'organisation' => $request->get('organisation'),
                 'location' => $request->get('location'),
             ]);

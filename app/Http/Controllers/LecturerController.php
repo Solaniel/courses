@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Validator;
 
 class LecturerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth',['except' => ['index' , 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +21,7 @@ class LecturerController extends Controller
     public function index()
     {
         $lecturerModel = new Lecturer();
-        $allLecturers = $lecturerModel::all();
+        $allLecturers = $lecturerModel::orderBy('firstName','asc')->paginate(5);
 
         return view('lecturers.index')->with('lecturers',$allLecturers);
     }

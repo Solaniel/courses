@@ -23,6 +23,6 @@ class Lecturer extends Model
         return $mappedData;
     }
     public function names() {
-        return $this->belongsTo('App\Lecturer');
+        return $this->belongsTo('App\Course');
     }
 }

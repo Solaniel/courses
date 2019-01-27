@@ -12,17 +12,15 @@ class Course extends Model
     ];
 
     public function getLecturers() {
+        $lecturers = DB::table('lecturers')
+            ->where('id', '=' ,'courses.lecturer_id')
+            ->select('firstName');
 
-        $lastName = DB::table('lecturers')
-            ->leftJoin('courses', 'id', '=', 'lecturer_id')
-            ->get();
-        return $lastName;
-
-
+        return $lecturers->implode('firstName' );
     }
 
 
     public function lecturer() {
-        $this->hasMany('App\Course');
+        $this->hasMany('App\Lecturer');
     }
 }

@@ -35,6 +35,7 @@
             <td>
                 <a class="btn btn-primary btn-red" href="{{ route('organisations.show', $value->id) }}" method="POST">Show</a>
             </td>
+            @if(!Auth::guest())
             <td>
                 <a class="btn btn-small btn-info" href="{{ URL::to('organisations/' . $value->id . '/edit') }}">Edit organisation</a>
             </td>
@@ -46,9 +47,11 @@
                 <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
             </td>
+                @endif
         </tr>
         @endforeach
     </tbody>
 </table>
+          {{$organisations->links()}}
 @endsection
 

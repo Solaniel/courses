@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Validator;
 
 class LocationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth',['except' => ['index' , 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +20,7 @@ class LocationController extends Controller
     public function index()
     {
         $locationModel = new Location();
-        $alllocations = $locationModel::all();
+        $alllocations = $locationModel::orderBy('locationName','asc')->paginate(5);
         return view('locations.index')->with('locations' , $alllocations);
     }
 

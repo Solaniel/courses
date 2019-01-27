@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Validator;
 
 class OrganisationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth',['except' => ['index' , 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +20,7 @@ class OrganisationController extends Controller
     public function index()
     {
         $organisationModel = new Organisation();
-        $allOrganisations = $organisationModel::all();
+        $allOrganisations = $organisationModel::orderBy('organisationName','asc')->paginate(5);
 
         return view('organisations.index')->with('organisations',$allOrganisations);
     }

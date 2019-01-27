@@ -39,12 +39,14 @@
             <td>{{$value->courseName}}</td>
             <td>{{$value->conDate}}</td>
             <td>{{$value->duration}} minutes</td>
-            <td>Mr./Mrs. {{$lecturers}}</td>
+            <td>{{$value->lecturer}}</td>
             <td>{{$value->organisation}}</td>
             <td>{{$value->location}}</td>
+
             <td>
                 <a class="btn btn-primary btn-red" href="{{ route('courses.show', $value->id) }}" method="POST">Show</a>
             </td>
+            @if(!Auth::guest())
             <td>
                 <a class="btn btn-small btn-info" href="{{ URL::to('courses/' . $value->id . '/edit') }}">Edit subject</a>
             </td>
@@ -55,11 +57,14 @@
                 <input name="_method" type="hidden" value="DELETE">
                 <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
+                @endif
             </td>
         </tr>
         @endforeach
+
     </tbody>
 </table>
+            {{$courses->links()}}
 @endsection
 
 
