@@ -13,12 +13,16 @@ class Lecturer extends Model
     public function getSpecificSelectData()
     {
         $mappedData = [];
-        $result = DB::select("SELECT concat(`firstName`, ' ', `lastName`) as `lecturerName`, `id` FROM coursesdatabase.lecturers;");
+        $result = DB::select("SELECT concat(`firstName`, ' ', `lastName`) as `lecturerName`, `id`
+          FROM coursesdatabase.lecturers;");
         if (!empty($result)) {
             foreach ($result as $key => $value) {
                 $mappedData[$value->id] = $value->lecturerName;
             }
         }
         return $mappedData;
+    }
+    public function names() {
+        return $this->belongsTo('App\Lecturer');
     }
 }

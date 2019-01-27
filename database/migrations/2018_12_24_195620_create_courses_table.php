@@ -18,7 +18,7 @@ class CreateCoursesTable extends Migration
             $table->string('courseName','128');
             $table->date('conDate');
             $table->integer('duration');
-            $table->string('lecturer','128');
+            $table->string('lecturer','128')->nullable();
             $table->string('organisation','64');
             $table->string('location','100');
             $table->timestamps();

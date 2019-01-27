@@ -19,9 +19,14 @@ class CourseController extends Controller
      */
     public function index()
     {
+        $lecturer = new Lecturer();
         $courseModel = new Course();
+
+        $lecturers = $courseModel->getLecturers();
+
         $allcourses = $courseModel::all();
-        return view('courses.index')->with('courses' , $allcourses);
+
+        return view('courses.index', compact('lecturers'))->with('courses' , $allcourses);
     }
 
     /**
@@ -59,7 +64,8 @@ class CourseController extends Controller
             'courseName' => 'bail|required|min:2|max:255',
             'conDate' => 'required',
             'duration' => 'required',
-            'lecturer' => 'required|min:2|max:128',
+            'lecturer' => 'nullable',
+            'lecturer_id' => 'required',
             'organisation' => 'required|min:2|max:128',
             'location' => 'required|min:1|max:128',
         );
@@ -74,6 +80,7 @@ class CourseController extends Controller
                 'conDate' => $request->get('conDate'),
                 'duration' => $request->get('duration'),
                 'lecturer' => $request->get('lecturer'),
+                'lecturer_id' => $request->get('lecturer_id'),
                 'organisation' => $request->get('organisation'),
                 'location' => $request->get('location'),
             ]);
@@ -106,9 +113,13 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
+
+        $lecturer = new Lecturer();
         $course = Course::find($id);
 
-        return view('courses.edit', compact('course','id'));
+        $data = $lecturer->getSpecificSelectData();
+        $allcourses = ['0' => 'Select Lecturer'] + $data;
+        return view('courses.edit', compact('course','id'))->with('allcourses',$allcourses);
     }
 
     /**

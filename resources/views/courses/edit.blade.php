@@ -1,62 +1,6 @@
 @extends('layouts.app')
-        <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        @section('content')
 
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-
-    <!-- Styles -->
-    <style>
-        html, body {
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .links > a {
-            padding: 0 25px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-    </style>
-</head>
-<body>
-<nav class="btn btn-light links">
-    <a href="{{ url('/') }}">Home</a>
-    <a href="/courses">Courses</a>
-    <a href="/lecturers">Lecturers</a>
-    <a href="/organisations">Organisations</a>
-    <a href="/locations">Locations</a>
-</nav>
 <h1>Edit form</h1>
 <div class="panel-body">
     @if ($errors->any())
@@ -81,7 +25,7 @@
             {{csrf_field()}}
             <label for="Date" class="col-sm-2 col-form-label col-form-label-lg">Date</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control form-control-lg" id="lgFormGroupInput2" placeholder="Date" name="conDate" value="{{$course->condate}}">
+                <input type="date" class="form-control form-control-lg" id="lgFormGroupInput2" placeholder="Date" name="conDate" value="{{$course->conDate}}">
             </div>
         </div>
         <div class="form-group row">
@@ -95,7 +39,13 @@
             {{csrf_field()}}
             <label for="Lecturer" class="col-sm-2 col-form-label col-form-label-lg">Lecturer</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control form-control-lg" id="lgFormGroupInput4" placeholder="Lecturer" name="lecturer" value="{{$course->lecturer}}">
+                <?php if (!empty($allcourses)):?>
+                <select name="lecturer_id" class="form-control">
+                    <?php foreach($allcourses as $key => $value):?>
+                    <option name="lecturer" selected value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <?php endif; ?>
             </div>
         </div>
         <div class="form-group row">
@@ -114,28 +64,11 @@
         </div>
         <div class="form-group row">
             <div class="col-md-2"></div>
-            <button type="submit" class="btn-outline-dark">Update</button>
+            <button type="submit" class="btn btn-secondary">Update</button>
         </div>
     </form>
 </div>
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
 
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
-        </div>
-    @endif
-
-
-</div>
-</body>
-</html>
+@endsection
 
 
